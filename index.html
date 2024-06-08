@@ -151,83 +151,67 @@
         </div>
     </div>
 
-	<div id="video_screen" style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; height: 80%; background-color: black; padding: 20px; border-radius: 10px;">
-		<div style="position: relative; height: 100%;">
-			<select id="video_quality" style="position: absolute; top: 10px; right: 10px; background-color: white; padding: 5px;">
-				<option value="" disabled selected>Select moon quality</option>
-				<option value="144p">144p</option>
-				<option value="240p">240p</option>
-				<option value="480p">480p</option>
-				<option value="720p">720p</option>
-				<option value="1080p">1080p</option>
-			</select>
-			<p id="quality_message" style="color: white; font-size: 18px;">Select quality to proceed</p>
-			<img id="video_image" src="" style="width: 100%; height: 100%; object-fit: contain; display: none;" />
-		</div>
-	</div>
-	
-
-	
-	
-	
-	
-
+    <div id="video_screen" style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; height: 80%; background-color: black; padding: 20px; border-radius: 10px;">
+        <div style="position: relative; height: 100%;">
+            <select id="video_quality" style="position: absolute; top: 10px; right: 10px; background-color: white; padding: 5px;">
+                <option value="" disabled selected>Select moon quality</option>
+                <option value="144p">144p</option>
+                <option value="240p">240p</option>
+                <option value="480p">480p</option>
+                <option value="720p">720p</option>
+                <option value="1080p">1080p</option>
+            </select>
+            <p id="quality_message" style="color: white; font-size: 18px;">Select quality to proceed</p>
+            <img id="video_image" src="" style="width: 100%; height: 100%; object-fit: contain; display: none;" />
+        </div>
+    </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="effect.js"></script>
     <script>
-     $(document).ready(function() {
-    $('#story').click(function() {
-        setTimeout(function() {
-            $('#video_screen_button').show();
+    $(document).ready(function() {
+        $('#story').click(function() {
+            setTimeout(function() {
+                $('#video_screen_button').show();
+                $('.balloons').hide(); // Hide the balloons
+            }, 95000); // 75000 milliseconds = 75 seconds
+        });
+
+        $('#video_screen_button').click(function() {
             $('#video_screen').show();
-            $('.balloons').hide(); // Hide the balloons
-        }, 7000); // 3000 milliseconds = 3 seconds
+        });
+
+        $('#video_quality').change(function() {
+            var quality = $(this).val();
+            var imageUrl = '';
+
+            switch(quality) {
+                case '144p':
+                    imageUrl = '144pp.png';
+                    break;
+                case '240p':
+                    imageUrl = '240p.png';
+                    break;
+                case '480p':
+                    imageUrl = '480p.png';
+                    break;
+                case '720p':
+                    imageUrl = '720.webp';
+                    break;
+                case '1080p':
+                    imageUrl = '1080p.png';
+                    break;
+                default:
+                    $('#video_image').hide();
+                    $('#quality_message').text('Select quality to see the moon').show();
+                    return;
+            }
+
+            $('#video_image').attr('src', imageUrl).show();
+            $('#quality_message').hide();
+        });
     });
-
-    $('#video_screen_button').click(function() {
-        $('#video_screen').show();
-    });
-
-    $('#video_quality').change(function() {
-        var quality = $(this).val();
-        var imageUrl = '';
-
-        switch(quality) {
-            case '144p':
-                imageUrl = '144pp.png';
-                break;
-            case '240p':
-                imageUrl = '240p.png';
-                break;
-            case '480p':
-                imageUrl = '480p.png';
-                break;
-            case '720p':
-                imageUrl = '720.webp';
-                break;
-            case '1080p':
-                imageUrl = '1080p.png';
-                break;
-            default:
-                $('#video_image').hide();
-                $('#quality_message').text('Select quality to see the moon').show();
-                return;
-        }
-
-        $('#video_image').attr('src', imageUrl).show();
-        $('#quality_message').hide();
-    });
-});
-
-
-
-
-
-
-
-
     </script>
 </body>
 </html>
